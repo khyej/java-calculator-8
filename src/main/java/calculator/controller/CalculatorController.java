@@ -16,5 +16,7 @@ public class CalculatorController {
         view.displayInputPrompt();
 
         String input = view.getInput();
+
+        int result = model.calculate(input);
     }
 }
