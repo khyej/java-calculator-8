@@ -13,10 +13,14 @@ public class StringCalculator {
             int customDelimiterIndex = text.indexOf("\\n");
 
             if (customDelimiterIndex == -1) {
-                // 예외 처리
+                throw new IllegalArgumentException();
             }
 
             String customDelimiter = text.substring(2, customDelimiterIndex);
+
+            if (customDelimiter.isEmpty() || customDelimiter.contains("\\n") || customDelimiter.contains("//")) {
+                throw new IllegalArgumentException();
+            }
 
             delimiter = customDelimiter;
             number = text.substring(customDelimiterIndex + 2);
@@ -42,12 +46,19 @@ public class StringCalculator {
             if (numberStr.isEmpty()) {
                 continue;
             }
-            int number = Integer.parseInt(numberStr);
-            total += number;
 
-            // parseInt 예외처리 필요
+            try {
+                int number = Integer.parseInt(numberStr);
+
+                if (number < 0) {
+                    throw new IllegalArgumentException();
+                }
+
+                total += number;
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException();
+            }
         }
-
         return total;
     }
 }
