@@ -14,5 +14,7 @@ public class CalculatorController {
 
     public void run() {
         view.displayInputPrompt();
+
+        String input = view.getInput();
     }
 }
