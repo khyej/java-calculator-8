@@ -6,20 +6,20 @@ public class StringCalculator {
             return 0;
         }
 
-        String delimiter = ",|:";
+        String delimiter = ",|:"; // 기본 구분자
         String number = text;
 
-        if (text.startsWith("//")) {
+        if (text.startsWith("//")) { // 커스텀 구분자
             int customDelimiterIndex = text.indexOf("\\n");
 
             if (customDelimiterIndex == -1) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("커스텀 구분자 지정이 잘못되었습니다.");
             }
 
             String customDelimiter = text.substring(2, customDelimiterIndex);
 
-            if (customDelimiter.isEmpty() || customDelimiter.contains("\\n") || customDelimiter.contains("//")) {
-                throw new IllegalArgumentException();
+            if (customDelimiter.isEmpty() || customDelimiter.contains("//") || customDelimiter.contains("\\n")) {
+                throw new IllegalArgumentException("공백, //, \\n은 커스텀 구분자로 사용할 수 없습니다.");
             }
 
             delimiter = customDelimiter;
@@ -51,12 +51,12 @@ public class StringCalculator {
                 int number = Integer.parseInt(numberStr);
 
                 if (number < 0) {
-                    throw new IllegalArgumentException();
+                    throw new IllegalArgumentException("음수를 입력할 수 없습니다.");
                 }
 
                 total += number;
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("구분자와 양수만 입력 가능합니다.");
             }
         }
         return total;
