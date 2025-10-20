@@ -1,5 +1,7 @@
 package calculator.model;
 
+import java.util.regex.Pattern;
+
 public class StringCalculator {
     public int calculate(String text) {
         if (text == null || text.isEmpty()) {
@@ -34,9 +36,7 @@ public class StringCalculator {
             return number.split(delimiter);
         }
 
-        String safeDelimiter = ",";
-        String replaceText = number.replace(delimiter, safeDelimiter);
-        return replaceText.split(safeDelimiter);
+        return number.split(Pattern.quote(delimiter));
     }
 
     private int sumNumber(String[] numbers) {
